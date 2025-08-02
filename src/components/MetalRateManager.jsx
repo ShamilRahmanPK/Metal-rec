@@ -9,12 +9,13 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import dayjs from "dayjs";
 import metals from "../data/metals";
 import { ToastContainer } from "react-toastify";
+
+import { toast } from "react-toastify";
 import {
   getAllMetalRatesApi,
   getPuritiesByMetalApi,
   saveMetalRateApi,
 } from "../services/allApi";
-import { toast } from "react-toastify";
 
 function MetalRateManager() {
   const [userInput, setUserInput] = useState({
