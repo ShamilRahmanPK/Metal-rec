@@ -4,12 +4,11 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
-
-
+  
   return (
     <>
-    <Home/>
-    <ToastContainer
+      <Home />
+      <ToastContainer
         position="top-right"
         autoClose={3000}
         hideProgressBar={false}
@@ -20,7 +19,7 @@ function App() {
         pauseOnHover
       />
     </>
-  )
+  );
 }
 
-export default App
+export default App;

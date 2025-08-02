@@ -194,7 +194,6 @@ function PurityManager() {
           </tbody>
         </table>
       </div>
-      <ToastContainer />
     </div>
   );
 }
