@@ -4,6 +4,7 @@ import "react-toastify/dist/ReactToastify.css";
 import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
 import Button from "@mui/material/Button";
+import CircularProgress from "@mui/material/CircularProgress";
 import metals from "../data/metals";
 import {
   deletePurityApi,
@@ -14,9 +15,8 @@ import { toast } from "react-toastify";
 
 function PurityManager() {
   const [userInput, setUserInput] = useState({ metalname: "", purity: "" });
-  console.log(userInput);
-
   const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(false); 
 
   useEffect(() => {
     getAllPurities();
@@ -25,20 +25,21 @@ function PurityManager() {
   const handleSave = async (e) => {
     e.preventDefault();
     if (userInput.metalname && userInput.purity) {
-      // api call
+      setLoading(true); // <-- start spinner
       try {
         const result = await savePurity(userInput);
         if (result.status == 200) {
           toast.success("Purity saved successfully");
           setUserInput({ metalname: "", purity: "" });
           getAllPurities();
-        } else {
-          if (result.status == 406) {
-            toast.warning("Purity already exists");
-          }
+        } else if (result.status == 406) {
+          toast.warning("Purity already exists");
         }
       } catch (err) {
         console.log(err);
+        toast.error("Error saving purity");
+      } finally {
+        setLoading(false); // <-- stop spinner
       }
     } else {
       toast.error("Please select a metalname and enter purity value");
@@ -48,8 +49,6 @@ function PurityManager() {
   const getAllPurities = async () => {
     try {
       const result = await getAllPuritiesApi();
-      console.log(result);
-
       if (result.status == 200) {
         setData(result.data);
       } else {
@@ -90,9 +89,9 @@ function PurityManager() {
             disablePortal
             options={metals}
             value={userInput.metalname}
-            onChange={(e, newValue) => {
-              setUserInput((prev) => ({ ...prev, metalname: newValue }));
-            }}
+            onChange={(e, newValue) =>
+              setUserInput((prev) => ({ ...prev, metalname: newValue }))
+            }
             sx={{
               width: 300,
               backgroundColor: "#1C1A33",
@@ -148,13 +147,22 @@ function PurityManager() {
           <Button
             onClick={handleSave}
             variant="contained"
+            disabled={loading} 
             sx={{
               backgroundColor: "#FFD369",
               color: "#1C1A33",
               "&:hover": { backgroundColor: "#FFC947" },
+              display: "flex",
+              alignItems: "center",
+              gap: "8px",
+              minWidth: "100px",
             }}
           >
-            Save
+            {loading ? (
+              <CircularProgress size={20} color="inherit" />
+            ) : (
+              "Save"
+            )}
           </Button>
         </div>
       </div>
