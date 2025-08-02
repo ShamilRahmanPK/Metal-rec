@@ -1,5 +1,5 @@
-import commonAPI from "./commonAPI";
 import SERVER_BASE_URL from "./serverURL";
+import commonAPI from "./commonAPI";
 
 // save purity
 export const  savePurity = async (reqBody)=>{
