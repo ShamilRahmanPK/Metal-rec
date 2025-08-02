@@ -21,7 +21,7 @@ function PurityManager() {
   const handleSave = async (e) => {
     e.preventDefault();
     if (userInput.metalname && userInput.purity) {
-      setLoading(true); // <-- start spinner
+      setLoading(true); 
       try {
         const result = await savePurity(userInput);
         if (result.status == 200) {
