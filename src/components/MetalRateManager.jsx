@@ -11,11 +11,7 @@ import metals from "../data/metals";
 import { ToastContainer } from "react-toastify";
 
 import { toast } from "react-toastify";
-import {
-  getAllMetalRatesApi,
-  getPuritiesByMetalApi,
-  saveMetalRateApi,
-} from "../services/allApi";
+import { getAllMetalRatesApi, getPuritiesByMetalApi, saveMetalRateApi } from "../services/allApi";
 
 function MetalRateManager() {
   const [userInput, setUserInput] = useState({
