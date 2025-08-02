@@ -7,11 +7,7 @@ import Button from "@mui/material/Button";
 import CircularProgress from "@mui/material/CircularProgress";
 import metals from "../data/metals";
 import { toast } from "react-toastify";
-import {
-  deletePurityApi,
-  getAllPuritiesApi,
-  savePurity,
-} from "../services/allApi";
+import { deletePurityApi, getAllPuritiesApi, savePurity } from "../services/allApi";
 
 function PurityManager() {
   const [userInput, setUserInput] = useState({ metalname: "", purity: "" });
